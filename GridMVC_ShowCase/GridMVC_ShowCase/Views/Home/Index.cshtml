@@ -1,7 +1,19 @@
-﻿
+﻿@using GridMvc.Html
+@model List<GridMVC_ShowCase.Controllers.HomeController.Foo>
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"> </script>
+
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.Title).Titled("Title").Sortable(true).Filterable(true); 
+    columns.Add(foo => foo.Description).Titled("Description").Sortable(true).Filterable(true);
+}).WithPaging(5)
